@@ -33,7 +33,7 @@
       <%= f.password_field :password_confirmation %>
 
       <%= f.label :gender %>
-      <%= f.select("gender", options_for_select([['Male', 1], ['Female', 2], ['Others',3]], @user.gender) ) %>
+      <%= f.select(:gender, options_for_select([['Male', 'male'], ['Female', 'female'], ['Others', 'other']], @user.gender) ) %>
 
       <%= f.label :date_of_birth, "Date Of Birth" %>
       <%= f.date_field :date_of_birth %>
@@ -42,18 +42,10 @@
       <%= f.text_field :house_number %>
       
       <%= f.label :city %>
-      <%= f.select(:city) do %>
-        <% [['Indore', 1], ['Ambala', 2], ['Gwalior',3]].each do |c| -%>
-           <%= content_tag(:option, c.first, value: c.last) %>
-         <% end %>
-      <% end %>
+      <%= f.select(:city, options_for_select([['Indore', 'indore'], ['Ambala', 'ambala'], ['Gwalior', 'gawalior']], @user.city) ) %>
      
       <%= f.label :state %>
-      <%= f.select(:state) do %>
-        <% [['Madhya pradesh', 1], ['Punjab', 2], ['Bihar',3]].each do |c| -%>
-           <%= content_tag(:option, c.first, value: c.last) %>
-         <% end %>
-      <% end %>
+      <%= f.select(:state, options_for_select([['Madhya Pradesh', 'madhya pradesh'], ['punjab', 'punjab'], ['Gwalior', 'gawalior']], @user.state) ) %>
       
       <%= f.submit "Update", class: "btn btn-primary" %>
     <% end %>

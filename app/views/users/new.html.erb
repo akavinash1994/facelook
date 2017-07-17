@@ -34,7 +34,7 @@
 
       <%= f.label :gender %>
       <%= f.select(:gender) do %>
-        <% [['Male', 1], ['Female', 2], ['Others',3]].each do |c| -%>
+        <% [['Male', 'male'], ['Female', 'female'], ['Others','other']].each do |c| -%>
            <%= content_tag(:option, c.first, value: c.last) %>
          <% end %>
       <% end %>
@@ -47,14 +47,14 @@
       
       <%= f.label :city %>
       <%= f.select(:city) do %>
-        <% [['Indore', 1], ['Ambala', 2], ['Gwalior',3]].each do |c| -%>
+        <% [['Indore', 'indore'], ['Ambala', 'ambala'], ['Gwalior','gwalior']].each do |c| -%>
            <%= content_tag(:option, c.first, value: c.last) %>
          <% end %>
       <% end %>
      
       <%= f.label :state %>
       <%= f.select(:state) do %>
-        <% [['Madhya pradesh', 1], ['Punjab', 2], ['Bihar',3]].each do |c| -%>
+        <% [['Madhya pradesh', 'madhya pardesh'], ['Punjab', 'punjab'], ['Bihar','bihar']].each do |c| -%>
            <%= content_tag(:option, c.first, value: c.last) %>
          <% end %>
       <% end %>
