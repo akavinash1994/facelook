@@ -1,0 +1,65 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-danger">
+         The form contains <%= pluralize(@user.errors.count, "error") %>.
+        </div>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <%= form_for :user, url: users_path do |f| %>
+      <%= f.label :first_name, "First Name" %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name, "Last Name" %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password, "Password" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.label :gender %>
+      <%= f.select(:gender) do %>
+        <% [['Male', 1], ['Female', 2], ['Others',3]].each do |c| -%>
+           <%= content_tag(:option, c.first, value: c.last) %>
+         <% end %>
+      <% end %>
+
+      <%= f.label :date_of_birth, "Date Of Birth" %>
+      <%= f.date_field :date_of_birth %>
+
+      <%= f.label :house_number, "House Number" %>
+      <%= f.text_field :house_number %>
+      
+      <%= f.label :city %>
+      <%= f.select(:city) do %>
+        <% [['Indore', 1], ['Ambala', 2], ['Gwalior',3]].each do |c| -%>
+           <%= content_tag(:option, c.first, value: c.last) %>
+         <% end %>
+      <% end %>
+     
+      <%= f.label :state %>
+      <%= f.select(:state) do %>
+        <% [['Madhya pradesh', 1], ['Punjab', 2], ['Bihar',3]].each do |c| -%>
+           <%= content_tag(:option, c.first, value: c.last) %>
+         <% end %>
+      <% end %>
+      
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
