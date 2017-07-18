@@ -31,6 +31,10 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 #bcrypt
 gem 'bcrypt',         '3.1.11'
+#cityand state
+gem 'city-state'
+#paperclip
+gem "paperclip", "~> 4.2"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :log_out, only: [:index]
   def index
   end
 
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to user_path(user)
+      redirect_to users_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

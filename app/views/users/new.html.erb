@@ -44,20 +44,27 @@
 
       <%= f.label :house_number, "House Number" %>
       <%= f.text_field :house_number %>
+
+      <%= f.label :country%>
+        <%= f.select (:country) do %>
+        <% CS.countries.each do |c| %>
+          <%= content_tag(:option, c.last, value: c.first) %>
+        <% end %>
+      <%end%>
+
+      <%= f.label :state%>
+        <%= f.select (:state) do %>
+        <% CS.states(:in).each do |c| %>
+          <%= content_tag(:option, c.last, value: c.first) %>
+        <% end %>
+      <%end%>
       
-      <%= f.label :city %>
-      <%= f.select(:city) do %>
-        <% [['Indore', 'indore'], ['Ambala', 'ambala'], ['Gwalior','gwalior']].each do |c| -%>
-           <%= content_tag(:option, c.first, value: c.last) %>
-         <% end %>
-      <% end %>
-     
-      <%= f.label :state %>
-      <%= f.select(:state) do %>
-        <% [['Madhya pradesh', 'madhya pardesh'], ['Punjab', 'punjab'], ['Bihar','bihar']].each do |c| -%>
-           <%= content_tag(:option, c.first, value: c.last) %>
-         <% end %>
-      <% end %>
+      <%= f.label :city%>
+        <%= f.select (:city) do %>
+        <% CS.cities(:mp,:in).each do |c| %>
+          <%= content_tag(:option, c, value: c) %>
+        <% end %>
+      <%end%>
       
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
