@@ -1,0 +1,49 @@
+
+<div class="panel panel-primary" >
+  <div class="panel-heading">
+    <h3 class="panel-title"> 
+      <% pic = current_user.profile_pictures.first %>
+      <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url, target: '_blank' %>
+      <%= current_user.first_name %> 
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= form_for :post , url: user_posts_path(current_user) do |f| %>
+      <%= f.text_area :content %> 
+     
+    <div class="panel-footer">
+      <%= f.submit "post" %>
+    </div>
+    <% end %>     
+  </div>
+  <% @users.each do |user| %>
+    <% if user.posts.present? %>
+      <% user.posts.each do |post| %>
+        <div class="panel-heading">
+          <h3 class="panel-title"> 
+            <% if user.profile_pictures.first.present? %>
+              <% pic = user.profile_pictures.first %>
+              <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url, target: '_blank' %>
+            <%end%>
+            <%= user.first_name %> 
+          </h3>
+        </div> 
+
+        <div class="panel-body">
+          <p><%= post.content %></p>   
+           <div class="panel-footer">
+            <%= link_to(posts_like_path(current_user,post.id),method: post )  do%>
+              <%  if Like.find_by(likeable_type: 'Post', user_id: current_user.id).present? %>
+                <span class="glyphicon glyphicon-thumbs-down" style="margin-left: 250px"><%= count("Post",post.id) %></span>
+                <span class="glyphicon glyphicon-edit" style="margin-left: 400px"></span>
+              <% else %>
+                <span class="glyphicon glyphicon-thumbs-up" style="margin-left: 250px"></span>
+                <span class="glyphicon glyphicon-edit" style="margin-left: 400px"></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <%end %>     
+    <% end %>
+  <% end %>
+</div>
