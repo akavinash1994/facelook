@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719130844) do
+ActiveRecord::Schema.define(version: 20170720125640) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "commentable_type"
     t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content"
+    t.bigint "user_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170719130844) do
     t.string "country"
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profile_pictures", "users"
