@@ -1,4 +1,3 @@
-
 <div class="panel panel-primary" >
   <div class="panel-heading">
     <h3 class="panel-title"> 
@@ -7,17 +6,21 @@
       <%= current_user.first_name %> 
     </h3>
   </div>
+
   <div class="panel-body">
     <%= form_for :post , url: user_posts_path(current_user) do |f| %>
       <%= f.text_area :content %> 
-    <div class="panel-footer">
-      <%= f.submit "post" %>
-    </div>
+      <div class="panel-footer">
+       <%= f.submit "post" %>
+      </div>
     <% end %>     
   </div>
+
+  <%= hidden_field_tag 'authenticity_token' ,form_authenticity_token, id: 'form_auth_token' %>
   <% @users.each do |user| %>
     <% if user.posts.present? %>
       <% user.posts.each do |post| %>
+      <div class="user-posts panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title"> 
             <% if user.profile_pictures.first.present? %>
@@ -28,36 +31,30 @@
           </h3>
         </div> 
 
-        <div class="panel-body">
-          <p><%= post.content %></p>   
+        
+          <div class="panel-body">
+            <p><%= post.content %></p>   
             <% if post.comments.present? %>
-            <div class="panel-footer" id="last_comment">
-              <% if user(post).profile_pictures.first.present? %>
-                <% pic = user(post).profile_pictures.first %>
-                <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '40', height: '40'), pic.image.url, target: '_blank' %>
-              <%end%>
-              <%= user(post).first_name %><br>
-             <%= post.comments.last.content %>
-            </div>
-            <% end %>          
+              <div class="last-comment" >
+                <%= render :partial => 'users/post', :locals => {:post => post} %>
+              </div>              
+            <% end %> 
+          </div>
 
-
-           <div class="panel-footer">
+          <div class="panel-footer">
             <%= link_to '#', class: 'like_link', data: { url: posts_like_path(current_user,post.id) } do %>
-                <span class="glyphicon glyphicon-thumbs-up votes-count" style="margin-left: 250px " id= "count"><%= post.likes.count%></span>
-                <!-- <span class="glyphicon glyphicon-edit" style="margin-left: 400px"></span> -->
+             <span class="glyphicon glyphicon-thumbs-up votes-count" style="margin-left: 250px " id= "count"><%= post.likes.count%></span>
             <% end %>
-              <span class="glyphicon glyphicon-edit" style="margin-left: 400px" id="comment"></span>
-
-            <div id="panel">
-              <%= form_for :comment , url: posts_comment_path(current_user,post.id) , id: "comment" do |f| %>
-                <%= f.text_area :content %>
-                <%= f.submit "comment" %>
-              <% end %>
+            <span class="glyphicon glyphicon-edit comment-icon" style="margin-left: 400px" id="comment"></span>
+            <div class="comment-panel" id="panel">
+               <%= hidden_field_tag 'comment_url' ,posts_comment_path(current_user, post.id), class: 'comment_url' %>
+                <%= text_area_tag :content, '', class:  'comment_content_class' %>
+                <%= button_tag "comment", class: "comment_commit" ,onclick: 'submit_comment(this)' %>
             </div>
           </div>
-        </div>
-      <%end %>     
+
+      <%end %> 
+      </div>    
     <% end %>
   <% end %>
 </div>
