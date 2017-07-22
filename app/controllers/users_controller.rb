@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def index
     @users =User.all
   end
+
   def new
     @user = User.new
   end
@@ -38,19 +39,19 @@ class UsersController < ApplicationController
   end
 
   private
-   def user_params
+  def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :gender, :date_of_birth, :phone_number, :house_number, :city, :state, :country)
-   end
+  end
 
-   def logged_in_user
+  def logged_in_user
     unless logged_in?
-     flash[:danger] = "Please log in."
+      flash[:danger] = "Please log in."
       redirect_to root_url
     end
   end
 
   def correct_user
-   @user = User.find(params[:id])
-   redirect_to(root_url) unless current_user?(@user)
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end

@@ -26,7 +26,7 @@ $(document).ready(function(){
       type: "POST",
       data: 'json',
       success: function (data) {
-      obj.find('.votes-count').text(data.count)
+        obj.find('.votes-count').text(data.count)
       },
       error: function (xhr, ajaxOptions, thrownError) {
       },
@@ -38,7 +38,6 @@ $(document).ready(function(){
     $(this).next().slideToggle("slow");
   });
 });
-
 
 function submit_comment(event){
   url = $(event).parent().children('.comment_url').val();

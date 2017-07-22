@@ -3,15 +3,15 @@ class CommentsController < ApplicationController
   before_action :get_profile_picture
 
   def create
-    return render json: {view: render_partial_form} if @post && @post.comments.create(comment_params)    
-    return render json: {view: render_partial_form} if @profile_picture && @profile_picture.comments.create(comment_params) 
+    return render json: { view: render_partial_form } if @post && @post.comments.create(comment_params)    
+    return render json: { view: render_partial_form } if @profile_picture && @profile_picture.comments.create(comment_params) 
   end
 
   private
   def destroy
     @post.comments.where(user_id: current_user.id).first.destroy if @post 
     @profile_picture.comments.where(user_id: current_user.id).first.destroy if @profile_picture
-    render json: {count: get_likes}
+    render json: { count: get_likes }
   end
   
   def get_post
@@ -27,6 +27,6 @@ class CommentsController < ApplicationController
   end
 
   def render_partial_form
-    render_to_string(partial: 'users/post', :locals => {:post => @post})
+    render_to_string(partial: 'users/post', :locals => { :post => @post })
   end
 end

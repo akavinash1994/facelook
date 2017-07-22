@@ -13,9 +13,8 @@ class ProfilePicturesController < ApplicationController
     flash[:success] = "The photo was added!"
     redirect_to user_path(current_user)
   end
-
+  
   private
-
   def photo_params
     params.require(:profilepicture).permit(:image)
   end
