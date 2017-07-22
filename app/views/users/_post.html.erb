@@ -1,0 +1,8 @@
+<div class="panel-footer" id="last_comment">
+  <% if user(post).profile_pictures.first.present? %>
+    <% pic = user(post).profile_pictures.first %>
+    <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '40', height: '40'), pic.image.url, target: '_blank' %>
+  <%end%>
+  <%= user(post).first_name %><br>
+  <%= post.comments.last.content %> 
+</div>
