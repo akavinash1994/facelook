@@ -8,7 +8,7 @@ class ProfilePicturesController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find_by(user_id: params[:user_id])
     @profilepicture = @user.profile_pictures.create(photo_params)
     flash[:success] = "The photo was added!"
     redirect_to user_path(current_user)

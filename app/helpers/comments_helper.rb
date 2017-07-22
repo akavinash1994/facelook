@@ -1,6 +1,6 @@
 module CommentsHelper
   def user(post)
-    User.find(post.comments.last.user_id)
+    User.find_by(id: post.comments.last.user_id)
   end
 
   def last_comment

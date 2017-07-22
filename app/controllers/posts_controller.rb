@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find_by(user_id: params[:user_id])
     @post = @user.posts.new(post_params)
     if @post.save
       flash[:success] = "The post added!"

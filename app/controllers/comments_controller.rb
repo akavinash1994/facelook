@@ -15,11 +15,11 @@ class CommentsController < ApplicationController
   end
   
   def get_post
-    @post = Post.find(params[:post_id]) if params[:post_id].present?
+    @post = Post.find_by(id: params[:post_id]) if params[:post_id].present?
   end
 
   def get_profile_picture
-    @profile_picture = ProfilePicture.find(params[:profile_picture_id]) if params[:profile_picture_id].present?
+    @profile_picture = ProfilePicture.find_by(id: params[:profile_picture_id]) if params[:profile_picture_id].present?
   end  
 
   def comment_params
