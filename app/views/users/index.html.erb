@@ -1,9 +1,26 @@
 <div class="panel panel-primary" >
   <div class="panel-heading">
     <h3 class="panel-title"> 
-      <% pic = current_user.profile_pictures.first %>
-      <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url, target: '_blank' %>
-      <%= current_user.first_name %> 
+      <div class="row">
+        <div class="col-lg-6">
+         <% pic = current_user.profile_pictures.first %>
+         <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url, target: '_blank' %>
+         <%= current_user.first_name %> 
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="start_searching">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+             </span>
+             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <div width="800%" height="800%">
+                </div>
+                
+              </ul>
+          </div>
+        </div>
+      </div>
     </h3>
   </div>
 
