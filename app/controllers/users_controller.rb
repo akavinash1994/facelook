@@ -38,6 +38,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    return render json: { result: search_result}
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :gender, :date_of_birth, :phone_number, :house_number, :city, :state, :country)
@@ -53,5 +57,10 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find_by(id: params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def search_result
+    return [first_name: "no result matches"] if !params[:first_name].present? || !User.where("first_name LIKE '%#{params[:first_name]}%'").present?
+    User.where("first_name LIKE '%#{params[:first_name]}%'")
   end
 end

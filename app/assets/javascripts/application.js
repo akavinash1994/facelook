@@ -42,7 +42,6 @@ $(document).ready(function(){
 function submit_comment(event){
   url = $(event).parent().children('.comment_url').val();
   dataType = 'html';
-  post_data =  $(event).parent().children('.comment_content_class').val();
   obj = $(event);
   $.ajax({
       url: url,
@@ -55,6 +54,26 @@ function submit_comment(event){
       }, 
     });
 }
-function start_searching(event){
 
+function start_searching(event){
+debugger;
+url = 'users/11/search';
+obj = $(event);
+// document.getElementById("search-dropdown").innerHTML = "";
+$.ajax({
+    url: url,
+    type: 'GET',
+    data: {'first_name' : obj.val()},
+    success: function (data) {
+      debugger;
+      obj.siblings('.dropdown-menu').children('.search_result').empty();
+      debugger;
+      for ( i=0; i<data.result.length; i++){
+        obj.siblings('.dropdown-menu').children('.search_result').append("<br><a href='users/"+ data.result[i].id + "' method='get' >" + data.result[i].first_name + "</a>")
+      }
+    },
+    error: function (xhr, ajaxOptions, thrownError){
+      debugger;
+    },
+});
 } 

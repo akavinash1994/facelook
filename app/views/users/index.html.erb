@@ -1,5 +1,5 @@
 <div class="panel panel-primary" >
-  <div class="panel-heading">
+  <div class="panel-heading" display= "inline-block">
     <h3 class="panel-title"> 
       <div class="row">
         <div class="col-lg-6">
@@ -9,15 +9,15 @@
         </div>
         <div class="col-lg-6">
           <div class="input-group">
-            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="start_searching">
+            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="start_searching(this)" id="first_name">
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">Go!</button>
-             </span>
-             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <div width="800%" height="800%">
-                </div>
-                
-              </ul>
+            </span>
+            <ul class="dropdown-menu" id="search-dropdown" aria-labelledby="dropdownMenu1" >
+              <div class='search_result' >
+
+              </div> 
+            </ul>
           </div>
         </div>
       </div>
