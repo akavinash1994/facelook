@@ -1,0 +1,28 @@
+<% if current_user != user %>
+  <% if friend_request_status(user) == 0 %>
+    <%= link_to('#', data: { url: friend_request_path(current_user,user) }, onclick: 'toggle_friend_status(this)') do %>
+      <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-user"></span>
+        <span>Add Friend</span>
+      </button>
+    <% end %>
+  <% elsif friend_request_status(user) == 2 %>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-user"></span>
+      <span>Friend Request Sent</span>
+    </button>
+  <% elsif friend_request_status(user) == 3 %>
+    <%= link_to('#', data: { url: friend_request_path(current_user,user) }, onclick: 'toggle_friend_status(this)') do %>
+      <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-user"></span>
+        <span>Conform Friend Rquest</span>
+      </button>
+      <% end %>
+  <% else %>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-user"></span>
+      <span>Friends</span>
+    </button>
+  <% end %>
+  <button type="button" class="btn btn-default">Message</button>
+<% end %>

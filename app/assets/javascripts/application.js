@@ -44,21 +44,21 @@ function submit_comment(event){
   dataType = 'html';
   obj = $(event);
   $.ajax({
-      url: url,
-      type: 'POST',
-      data: {'content' : obj.parent().children('.comment_content_class').val() },
-      success:  function (data) {
-        obj.closest('.panel-footer').siblings('.panel-body').find('.last-comment').html(data.view);
-      }, 
-      error: function (xhr, ajaxOptions, thrownError) {
-      }, 
-    });
+    url: url,
+    type: 'POST',
+    data: {'content' : obj.parent().children('.comment_content_class').val() },
+    success:  function (data) {
+      obj.closest('.panel-footer').siblings('.panel-body').find('.last-comment').html(data.view);
+    }, 
+    error: function (xhr, ajaxOptions, thrownError) {
+    }, 
+  });
 }
 
-function start_searching(event){
-url = 'users/11/search';
-obj = $(event);
-$.ajax({
+function start_searching(event){ 
+  url = $(event).siblings('.search_url').val();
+  obj = $(event);
+  $.ajax({
     url: url,
     type: 'GET',
     data: {'first_name' : obj.val()},
@@ -70,5 +70,20 @@ $.ajax({
     },
     error: function (xhr, ajaxOptions, thrownError){
     },
-});
+  });
 } 
+
+function toggle_friend_status(event){
+  url = $(event).data('url');
+  obj = $(event);
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: 'json',
+    success: function (data) {
+      obj.parent().html(data.view)
+    },
+    error: function (xhr, ajaxOptions, thrownError){
+    },
+  });
+}

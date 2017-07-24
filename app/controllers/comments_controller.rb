@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
   before_action :get_profile_picture
 
   def create
-    return render json: { view: render_partial_form } if @post && @post.comments.create(comment_params)    
-    return render json: { view: render_partial_form } if @profile_picture && @profile_picture.comments.create(comment_params) 
+    return render json: { view: render_partial_form } if @post && @post.comments.create(comment_params)
+    return render json: { view: render_partial_form } if @profile_picture && @profile_picture.comments.create(comment_params)
   end
 
   private
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 
   def get_profile_picture
     @profile_picture = ProfilePicture.find_by(id: params[:profile_picture_id]) if params[:profile_picture_id].present?
-  end  
+  end
 
   def comment_params
     params.permit(:user_id, :content)   

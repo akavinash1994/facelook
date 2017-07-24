@@ -4,8 +4,8 @@ class LikesController < ApplicationController
 
   def create
     return destroy unless !liked?
-    return render json: { count: get_likes } if @post && @post.likes.create(user_id: params[:user_id])    
-    return render json: { count: get_likes } if @profile_picture && @profile_picture.likes.create(user_id: params[:user_id]) 
+    return render json: { count: get_likes } if @post && @post.likes.create(user_id: params[:user_id])
+    return render json: { count: get_likes } if @profile_picture && @profile_picture.likes.create(user_id: params[:user_id])
   end
   
   private
