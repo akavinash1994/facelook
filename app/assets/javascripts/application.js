@@ -58,7 +58,6 @@ function submit_comment(event){
 function start_searching(event){
 url = 'users/11/search';
 obj = $(event);
-// document.getElementById("search-dropdown").innerHTML = "";
 $.ajax({
     url: url,
     type: 'GET',

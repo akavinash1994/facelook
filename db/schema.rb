@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723071907) do
+ActiveRecord::Schema.define(version: 20170724102540) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "commentable_type"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20170723071907) do
     t.bigint "user_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "user1_id"
+    t.index ["user1_id"], name: "index_friends_on_user1_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -70,6 +77,8 @@ ActiveRecord::Schema.define(version: 20170723071907) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "friends", "users"
+  add_foreign_key "friends", "users", column: "user1_id"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profile_pictures", "users"
