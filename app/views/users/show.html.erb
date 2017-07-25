@@ -1,0 +1,10 @@
+<%= link_to(new_user_profile_picture_path(@user)) do %>
+  <div class="css-shapes-preview">
+    <% @user.profile_pictures.each do |pic| %>
+      <%= link_to image_tag(pic.image.url, class: 'css-shapes-preview'), pic.image.url, target: '_blank' %>
+    <% end %>
+  </div>
+<% end %>
+<div class="btn-group  navbar-right" role="group" aria-label="..." style="padding-left: 80px">
+  <%= render :partial => 'users/friend', :locals => {:user => @user} %>
+</div>
