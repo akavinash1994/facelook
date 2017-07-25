@@ -10,7 +10,7 @@
         <div class="col-lg-6">
           <div class="input-group">
              <%= hidden_field_tag 'search_url' ,search_path(current_user), class: 'search_url' %>
-            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="start_searching(this)" id="first_name">
+            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="startSearching(this)" id="first_name">
             <span class="input-group-btn" >
               <button class="btn btn-default" type="button">Go!</button>
             </span>
@@ -62,7 +62,7 @@
             <div class="comment-panel" id="panel">
                <%= hidden_field_tag 'comment_url' ,posts_comment_path(current_user, post.id), class: 'comment_url' %>
                 <%= text_area_tag :content, '', class:  'comment_content_class' %>
-                <%= button_tag "comment", class: "comment_commit" ,onclick: 'submit_comment(this)' %>
+                <%= button_tag "comment", class: "comment_commit" ,onclick: 'submitComment(this)' %>
             </div>
           </div>
       <%end %> 

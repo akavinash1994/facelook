@@ -15,8 +15,9 @@
 //= require jquery
 //= require bootstrap
 //= require_tree .
+
 var AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
-$(document).ready(function(){
+$(document).on('turbolinks:load', function() {
   $(".like_link").click(function(e){
     url = $(this).data('url')
     obj = $(this)
@@ -39,7 +40,7 @@ $(document).ready(function(){
   });
 });
 
-function submit_comment(event){
+function submitComment(event){
   url = $(event).parent().children('.comment_url').val();
   dataType = 'html';
   obj = $(event);
@@ -55,7 +56,7 @@ function submit_comment(event){
   });
 }
 
-function start_searching(event){ 
+function startSearching(event){ 
   url = $(event).siblings('.search_url').val();
   obj = $(event);
   $.ajax({
@@ -73,7 +74,7 @@ function start_searching(event){
   });
 } 
 
-function toggle_friend_status(event){
+function toggleFriendStatus(event){
   url = $(event).data('url');
   obj = $(event);
   $.ajax({
