@@ -1,7 +1,7 @@
 <%= link_to(new_user_profile_picture_path(@user)) do %>
   <div class="css-shapes-preview">
     <% @user.profile_pictures.each do |pic| %>
-      <%= link_to image_tag(pic.image.url, class: 'css-shapes-preview'), pic.image.url, target: '_blank' %>
+      <%= link_to image_tag(pic.image.url, style: "border-radius: 150px; position: absolute; height: 150px; width: 150px; top: 0px; left: 0px;"), pic.image.url, target: '_blank' %>
     <% end %>
   </div>
 <% end %>
