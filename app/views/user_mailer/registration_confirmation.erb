@@ -1,0 +1,9 @@
+
+Welcome to facelook , <%= @user.first_name %>
+===============================================
+ 
+You have successfully registered to facelook,
+your username is: <%= @user.email%>.
+
+To confirm your registration click the URL below.
+<%=  link_to "confirm", confirm_email_url(@user.confirm_token, host: "http://localhost:3000")%>

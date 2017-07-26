@@ -1,0 +1,74 @@
+<div class="panel panel-primary" >
+  <div class="panel-heading" display= "inline-block">
+    <h3 class="panel-title"> 
+      <div class="row">
+        <div class="col-lg-6">
+          <% if current_user.profile_pictures.present? %>
+            <% pic = current_user.profile_pictures.first %>
+            <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url,target: '_blank' %>
+            <% end %>
+          <%= current_user.first_name %> 
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+             <%= hidden_field_tag 'search_url' ,search_path(current_user), class: 'search_url' %>
+            <input type="text" class="form-control dropdown-toggle" placeholder="Search for..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onkeyup="start_searching(this)" id="first_name">
+            <span class="input-group-btn" >
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+            <ul class="dropdown-menu" id="search-dropdown" aria-labelledby="dropdownMenu1" >
+              <div class='search_result' >
+              </div> 
+            </ul>
+          </div>
+        </div>
+      </div>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <%= form_for :post , url: user_posts_path(current_user) do |f| %>
+      <%= f.text_area :content %> 
+      <div class="panel-footer">
+       <%= f.submit "post" %>
+      </div>
+    <% end %>     
+  </div>
+  <%= hidden_field_tag 'authenticity_token' ,form_authenticity_token, id: 'form_auth_token' %>
+  <% @users.each do |user| %>
+    <% if user.posts.present? %>
+      <% user.posts.each do |post| %>
+      <div class="user-posts panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"> 
+            <% if user.profile_pictures.first.present? %>
+              <% pic = user.profile_pictures.first %>
+              <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url, target: '_blank' %>
+            <%end%>
+            <%= user.first_name %> 
+          </h3>
+        </div> 
+          <div class="panel-body">
+            <p><%= post.content %></p>   
+            <div class="last-comment" >
+              <% if post.comments.present? %>
+                <%= render :partial => 'users/post', :locals => {:post => post} %>
+              <% end %>
+            </div>               
+          </div>
+          <div class="panel-footer">
+            <%= link_to '#', class: 'like_link', data: { url: posts_like_path(current_user,post.id) } do %>
+             <span class="glyphicon glyphicon-thumbs-up votes-count" style="margin-left: 250px " id= "count"><%= post.likes.count%></span>
+            <% end %>
+            <span class="glyphicon glyphicon-edit comment-icon" style="margin-left: 400px" id="comment"></span>
+            <div class="comment-panel" id="panel">
+               <%= hidden_field_tag 'comment_url' ,posts_comment_path(current_user, post.id), class: 'comment_url' %>
+                <%= text_area_tag :content, '', class:  'comment_content_class' %>
+                <%= button_tag "comment", class: "comment_commit" ,onclick: 'submit_comment(this)' %>
+            </div>
+          </div>
+      <%end %> 
+      </div>    
+    <% end %>
+  <% end %>
+</div>
