@@ -3,9 +3,11 @@
     <h3 class="panel-title"> 
       <div class="row">
         <div class="col-lg-6">
-         <% pic = current_user.profile_pictures.first %>
-         <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url,target: '_blank' %>
-         <%= current_user.first_name %> 
+          <% if current_user.profile_pictures.present? %>
+            <% pic = current_user.profile_pictures.first %>
+            <%= link_to image_tag(pic.image.url, class: 'img-thumbnail', alt: 'cinque Terre', width: '80', height: '40'), pic.image.url,target: '_blank' %>
+            <% end %>
+          <%= current_user.first_name %> 
         </div>
         <div class="col-lg-6">
           <div class="input-group">
@@ -48,11 +50,11 @@
         </div> 
           <div class="panel-body">
             <p><%= post.content %></p>   
-            <% if post.comments.present? %>
-              <div class="last-comment" >
+            <div class="last-comment" >
+              <% if post.comments.present? %>
                 <%= render :partial => 'users/post', :locals => {:post => post} %>
-              </div>              
-            <% end %> 
+              <% end %>
+            </div>               
           </div>
           <div class="panel-footer">
             <%= link_to '#', class: 'like_link', data: { url: posts_like_path(current_user,post.id) } do %>

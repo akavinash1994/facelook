@@ -21,10 +21,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      UserMailer.welcome_email(@user).deliver_later
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to user_path(@user)
+      @user.set_confirmation_token
+      if @user.save
+        UserMailer.registration_confirmation(@user).deliver_later
+        flash[:success] = "Please confirm your email address to continue"
+        redirect_to root_url
+      end
     else
       render 'new'
     end
@@ -42,6 +44,19 @@ class UsersController < ApplicationController
 
   def search
     return render json: { result: search_result}
+  end
+
+  def confirm_email
+    user = User.find_by_confirm_token(params[:token])
+    if user
+      user.validate_email
+      if user.save(validate: false) 
+        redirect_to new_session_path
+      end
+    else
+     flash[:error] = "Sorry. User does not exist"
+     redirect_to root_url
+    end
   end
 
   private

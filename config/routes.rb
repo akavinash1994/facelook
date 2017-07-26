@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   post 'users/:user_id/posts/:post_id/comments', to: 'comments#create', as: :posts_comment
   get 'users/:user_id/search', to: 'users#search', as: :search
   post 'users/:user_id/:user1_id/friends', to: 'friends#create', as: :friend_request
+  get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

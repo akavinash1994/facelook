@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :profile_pictures, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :friends, dependent: :destroy
+  has_many :comments, through: :posts , dependent: :destroy
+  has_many :likes, through: :posts , dependent: :destroy
   before_save { self.email = email.downcase }
   validates :first_name,  presence: true, length: { maximum: 50 }
   validates :last_name,  presence: true, length: { maximum: 50 }
@@ -11,4 +13,15 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  def validate_email
+    self.email_confirmed = true
+    self.confirm_token = nil
+  end
+
+  def set_confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
 end

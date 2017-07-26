@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require_tree .
 var AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
-$(document).ready(function(){
+$( document ).on('turbolinks:load', function() {
   $(".like_link").click(function(e){
     url = $(this).data('url')
     obj = $(this)
